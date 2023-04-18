@@ -27,6 +27,7 @@ The server is intended to run under Linux environment (Ubuntu 22.04), running un
 2. Change into the project directory
 3. Run `make` to compile the c file
 4. Start the server using the following command:
+
 `./httpserver <port> -t <number of threads>`
 - Port number is required
 - An optional argument -t to special the number of threads to use, default: 4
@@ -44,7 +45,9 @@ The TOML file allows you to specify very specific (and interesting) interleaving
 - `watson` identifies if the audit log and responses are consistent with each other.
 
 To run the test, you will use the following command:
+
 `make`
+
 `./test_repo.sh`
 
 Server should produce responses that are coherent and atomic with respect to the ordering specified in your audit log. That is, if an entry for a request R1, is earlier than an entry for a request, R2, in the log, then the server's response to R2 must be as though the processing for R occurred in its entirety before any of the processing for R2. We call this ordering a linearization because it creates a single linear ordering of all client requests. We say that this ordering is a total order because it provides an ordering for all elements (i.e., for any two unique requests, R1 or R2, your audit log will identify that either R1 happens-before R2 or that Rz happens-before R1).
